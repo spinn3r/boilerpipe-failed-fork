@@ -25,6 +25,7 @@ public class CorporaTests {
         test( "http://www.cnn.com/2015/02/26/us/arizona-llamas-escape/index.html", "testCnn1" );
         test( "http://www.cnn.com/videos/us/2015/02/26/pkg-woman-loses-over-800-pounds.ktrk", "testCnn2" );
         test( "http://www.cnn.com/2015/02/27/world/mexico-knights-templar-leader-detained/index.html", "testCnn3" );
+        test( "http://techcrunch.com/2015/02/27/nsa-bullk-telephony-metadata-program-reupped-until-parts-of-the-patriot-act-potentially-sunset/", "testTechcrunch1" );
 
     }
 
