@@ -19,16 +19,25 @@ public class CorporaTests {
     CorporaAsserter corporaAsserter = new CorporaAsserter( getClass() );
 
     @Test
-    public void testBbc1() throws Exception {
+    public void testAll() throws Exception {
 
-        String link = "http://www.bbc.com/news/world-europe-31669061";
+        test( "http://www.bbc.com/news/world-europe-31669061", "testBbc1" );
+        test( "http://www.cnn.com/2015/02/26/us/arizona-llamas-escape/index.html", "testCnn1" );
+        test( "http://www.cnn.com/videos/us/2015/02/26/pkg-woman-loses-over-800-pounds.ktrk", "testCnn2" );
+        test( "http://www.cnn.com/2015/02/27/world/mexico-knights-templar-leader-detained/index.html", "testCnn3" );
+
+    }
+
+    private void test( String link, String key ) throws Exception {
+
         String html = read( link );
 
         ArticleExtractor articleExtractor = ArticleExtractor.getInstance();
 
-        corporaAsserter.assertCorpora( "testBbc1", articleExtractor.getText( html ) );
+        corporaAsserter.assertCorpora( key, articleExtractor.getText( html ) );
 
     }
+
 
     private String key( String link ) {
 
