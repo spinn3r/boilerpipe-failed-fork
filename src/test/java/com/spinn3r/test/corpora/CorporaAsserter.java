@@ -22,10 +22,7 @@ public class CorporaAsserter {
      */
     public static boolean UPDATE_MODE = true;
 
-    // TODO: I need an easy way to configure this locally...
-    public static String ROOT = "/projects/boilerpipe/src/test/resources/";
-
-    private final Class<?> parent;
+    private final CorporaCache corporaCache;
 
     /**
      * Create a corpora assertion tester using the given class as a parent
@@ -33,36 +30,21 @@ public class CorporaAsserter {
      * @param parent
      */
     public CorporaAsserter(Class<?> parent) {
-        this.parent = parent;
+        this.corporaCache = new CorporaCache( parent );
     }
 
-    public void assertCorpora( String name, String actual ) throws IOException {
+    public void assertCorpora( String key, String actual ) throws IOException {
 
-        String path = String.format( "/corpora/%s.%s.dat", parent.getName(), name );
 
         if ( UPDATE_MODE ) {
 
-            File file = new File( ROOT, path );
-
-            Files.createDirectories( Paths.get( file.getParent() ) );
-
-            try( OutputStream out = new FileOutputStream( file ) ) {
-
-                out.write( actual.getBytes( Charsets.UTF_8 ) );
-
-            }
+            corporaCache.write( key, actual );
 
         } else {
 
-            try (InputStream is = parent.getResourceAsStream( path )) {
+            String expected = corporaCache.read( key );
 
-                byte[] data = ByteStreams.toByteArray( is );
-
-                String expected = new String( data, Charsets.UTF_8 );
-
-                assertEquals( expected, actual );
-
-            }
+            assertEquals( expected, actual );
 
         }
 
