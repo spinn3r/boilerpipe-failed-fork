@@ -1,11 +1,6 @@
 package com.spinn3r.test.corpora;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.ByteStreams;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
