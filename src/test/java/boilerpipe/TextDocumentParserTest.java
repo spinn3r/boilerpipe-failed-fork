@@ -40,6 +40,11 @@ public class TextDocumentParserTest {
 
         TextDocument doc = parse( "/test3.html" );
 
+        // I can use jsoup for this by taking the code from flushBlock in
+        // boilerpipe.sax.BoilerpipeHTMLContentHandler and doing a jsoup query
+        // for div,p ... in jsoup and then taking the text from the elements to
+        // build a  TextBlock
+
         assertEquals( "TextBlock{isContent=false, text=hello world 1, labels=null, offsetBlocksStart=0, offsetBlocksEnd=0, numWords=3, numWordsInAnchorText=0, numWordsInWrappedLines=3, numWrappedLines=1, textDensity=3.0, linkDensity=0.0, containedTextElements={2}, numFullTextWords=0, tagLevel=3}\n" +
                         "TextBlock{isContent=false, text=this is a link 2 and this is 3 mixed 4 content 5., labels=null, offsetBlocksStart=1, offsetBlocksEnd=1, numWords=13, numWordsInAnchorText=5, numWordsInWrappedLines=13, numWrappedLines=1, textDensity=13.0, linkDensity=0.3846154, containedTextElements={5, 6, 7, 9, 10}, numFullTextWords=0, tagLevel=4}\n" +
                         "TextBlock{isContent=false, text=this is 6, labels=null, offsetBlocksStart=2, offsetBlocksEnd=2, numWords=3, numWordsInAnchorText=0, numWordsInWrappedLines=3, numWrappedLines=1, textDensity=3.0, linkDensity=0.0, containedTextElements={12}, numFullTextWords=0, tagLevel=3}\n" +
