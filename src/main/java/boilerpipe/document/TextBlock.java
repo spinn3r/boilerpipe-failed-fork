@@ -59,10 +59,14 @@ public class TextBlock implements Cloneable {
         this(text, null, 0,0,0,0,0);
     }
     
-    public TextBlock(final String text, final BitSet containedTextElements,
-            final int numWords, final int numWordsInAnchorText,
-            final int numWordsInWrappedLines, final int numWrappedLines,
-            final int offsetBlocks) {
+    public TextBlock(final String text,
+                     final BitSet containedTextElements,
+                     final int numWords,
+                     final int numWordsInAnchorText,
+                     final int numWordsInWrappedLines,
+                     final int numWrappedLines,
+                     final int offsetBlocks ) {
+
         this.text = text;
         this.containedTextElements = containedTextElements;
         this.numWords = numWords;
@@ -71,7 +75,9 @@ public class TextBlock implements Cloneable {
         this.numWrappedLines = numWrappedLines;
         this.offsetBlocksStart = offsetBlocks;
         this.offsetBlocksEnd = offsetBlocks;
+
         initDensities();
+
     }
 
     public boolean isContent() {

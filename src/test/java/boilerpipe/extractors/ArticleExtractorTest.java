@@ -1,5 +1,9 @@
 package boilerpipe.extractors;
 
+import boilerpipe.document.TextDocument;
+import boilerpipe.sax.BoilerpipeSAXInput;
+import boilerpipe.sax.HTMLDocument;
+import boilerpipe.sax.HTMLFetcher;
 import org.junit.Test;
 
 import java.net.URL;
@@ -13,9 +17,18 @@ public class ArticleExtractorTest {
 
         ArticleExtractor articleExtractor = ArticleExtractor.getInstance();
 
-        String text = articleExtractor.getText( new URL( "http://arstechnica.com/business/2015/02/fcc-votes-for-net-neutrality-a-ban-on-paid-fast-lanes-and-title-ii/") );
+        URL url = new URL( "http://arstechnica.com/business/2015/02/fcc-votes-for-net-neutrality-a-ban-on-paid-fast-lanes-and-title-ii/");
 
-        System.out.printf( "%s\n", text );
+        //String text = articleExtractor.getText( url );
+
+        final HTMLDocument htmlDoc = HTMLFetcher.fetch( url );
+
+        final TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource())
+                                   .getTextDocument();
+
+        //String text = articleExtractor.process(doc);
+
+        //System.out.printf( "%s\n", text );
 
     }
 

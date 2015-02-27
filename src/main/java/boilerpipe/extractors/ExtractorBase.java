@@ -83,7 +83,7 @@ public abstract class ExtractorBase implements BoilerpipeExtractor {
      */
     public String getText(final URL url) throws BoilerpipeProcessingException {
         try {
-        	return getText( HTMLFetcher.fetch( url ).toInputSource());
+        	return getText( HTMLFetcher.fetch( url ).toInputSource() );
         } catch (IOException e) {
             throw new BoilerpipeProcessingException(e);
         }
