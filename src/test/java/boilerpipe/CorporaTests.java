@@ -1,0 +1,73 @@
+package boilerpipe;
+
+import boilerpipe.extractors.ArticleExtractor;
+import com.spinn3r.test.corpora.CorporaAsserter;
+import com.spinn3r.test.corpora.CorporaCache;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.net.URL;
+
+/**
+ * Tests using real world documents to look at real world accuracy.
+ */
+public class CorporaTests {
+
+    CorporaCache corporaCache = new CorporaCache( getClass() );
+    CorporaAsserter corporaAsserter = new CorporaAsserter( getClass() );
+
+    @Test
+    public void testBbc1() throws Exception {
+
+        String link = "http://www.bbc.com/news/world-europe-31669061";
+        String html = read( link );
+
+        ArticleExtractor articleExtractor = ArticleExtractor.getInstance();
+
+        corporaAsserter.assertCorpora( "testBbc1", articleExtractor.getText( html ) );
+
+    }
+
+    private String key( String link ) {
+
+        return link.replaceAll( "[:/?=&%]", "_" );
+
+    }
+
+
+    private String read( String link ) throws IOException {
+
+        String key = key( link );
+
+        if ( corporaCache.contains( key ) ) {
+            return corporaCache.read( key );
+        }
+
+        String data = fetch( link );
+
+        corporaCache.write( key, data );
+
+        return data;
+
+    }
+
+
+    // fetch the given link by going over the network.
+    private String fetch( String link ) throws IOException {
+
+        // TODO: should we strip any charset in the <meta> since after this we
+        // always save as UTF8 ?
+
+        URL url = new URL( link );
+
+        Document doc = Jsoup.parse( url, 30000 );
+
+        String content = doc.outerHtml();
+
+        return content;
+
+    }
+
+}

@@ -23,6 +23,12 @@ public class CorporaCache {
         this.parent = parent;
     }
 
+    public boolean contains( String key ) {
+        String path = computePath( key );
+        File file = new File( ROOT, path );
+        return file.exists();
+    }
+
     public void write( String key, String data ) throws IOException {
 
         String path = computePath( key );
