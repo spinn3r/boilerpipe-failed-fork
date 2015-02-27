@@ -30,6 +30,11 @@ import java.util.Set;
  * @author Christian Kohlschütter
  */
 public class TextBlock implements Cloneable {
+
+    private static final BitSet EMPTY_BITSET = new BitSet();
+    public static final TextBlock EMPTY_START = new TextBlock("", EMPTY_BITSET, 0, 0, 0, 0, -1);
+    public static final TextBlock EMPTY_END = new TextBlock("", EMPTY_BITSET, 0, 0, 0, 0, Integer.MAX_VALUE);
+
     boolean isContent = false;
     private CharSequence text;
     Set<String> labels = null;
@@ -48,12 +53,6 @@ public class TextBlock implements Cloneable {
 
     private int numFullTextWords = 0;
 	private int tagLevel;
-
-    private static final BitSet EMPTY_BITSET = new BitSet();
-    public static final TextBlock EMPTY_START = new TextBlock("", EMPTY_BITSET,
-            0, 0, 0, 0, -1);
-    public static final TextBlock EMPTY_END = new TextBlock("", EMPTY_BITSET,
-            0, 0, 0, 0, Integer.MAX_VALUE);
 
     public TextBlock(final String text) {
         this(text, null, 0,0,0,0,0);
@@ -170,9 +169,31 @@ public class TextBlock implements Cloneable {
         return offsetBlocksEnd;
     }
 
+    /*
     public String toString() {
         return "[" + offsetBlocksStart + "-" + offsetBlocksEnd + ";tl="+tagLevel+"; nw="+numWords+";nwl="+numWrappedLines+";ld="+linkDensity+"]\t"
                 + (isContent?"CONTENT":"boilerplate") + "," + labels + "\n" + getText();
+    }
+    */
+
+    @Override
+    public String toString() {
+        return "TextBlock{" +
+                 "isContent=" + isContent +
+                 ", text=" + text +
+                 ", labels=" + labels +
+                 ", offsetBlocksStart=" + offsetBlocksStart +
+                 ", offsetBlocksEnd=" + offsetBlocksEnd +
+                 ", numWords=" + numWords +
+                 ", numWordsInAnchorText=" + numWordsInAnchorText +
+                 ", numWordsInWrappedLines=" + numWordsInWrappedLines +
+                 ", numWrappedLines=" + numWrappedLines +
+                 ", textDensity=" + textDensity +
+                 ", linkDensity=" + linkDensity +
+                 ", containedTextElements=" + containedTextElements +
+                 ", numFullTextWords=" + numFullTextWords +
+                 ", tagLevel=" + tagLevel +
+                 '}';
     }
 
     /**
@@ -287,4 +308,7 @@ public class TextBlock implements Cloneable {
 	public void setTagLevel(int tagLevel) {
 		this.tagLevel = tagLevel;
 	}
+
+
+
 }

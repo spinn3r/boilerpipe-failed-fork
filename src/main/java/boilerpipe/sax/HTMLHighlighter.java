@@ -147,10 +147,6 @@ public final class HTMLHighlighter {
 	 * Fetches the given {@link URL} using {@link HTMLFetcher} and processes the
 	 * retrieved HTML using the specified {@link BoilerpipeExtractor}.
 	 * 
-	 * @param doc
-	 *            The processed {@link TextDocument}.
-	 * @param is
-	 *            The original HTML document.
 	 * @return The highlighted HTML.
 	 * @throws BoilerpipeProcessingException
 	 */
