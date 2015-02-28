@@ -138,4 +138,12 @@ public class TextDocument implements Cloneable {
     	}
     	return new TextDocument(title, list);
     }
+
+    @Override
+    public String toString() {
+        return "TextDocument{" +
+                 "textBlocks=" + textBlocks +
+                 ", title='" + title + '\'' +
+                 '}';
+    }
 }

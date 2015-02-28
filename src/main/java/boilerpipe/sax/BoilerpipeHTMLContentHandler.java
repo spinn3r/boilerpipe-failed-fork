@@ -299,6 +299,7 @@ public class BoilerpipeHTMLContentHandler implements ContentHandler {
 	}
 
 	public void flushBlock() {
+
 		if (inBody == 0) {
 			if ("TITLE".equalsIgnoreCase(lastStartTag) && inBody == 0) {
 				setTitle(tokenBuffer.toString().trim());
@@ -381,6 +382,7 @@ public class BoilerpipeHTMLContentHandler implements ContentHandler {
 		tb.setTagLevel(blockTagLevel);
 		addTextBlock(tb);
 		blockTagLevel = -1;
+
 	}
 
 	protected void addTextBlock(final TextBlock tb) {
@@ -404,6 +406,7 @@ public class BoilerpipeHTMLContentHandler implements ContentHandler {
 		textBlocks.add(tb);
 	}
 
+	// TODO: probably migrate to ICU4J for this.
 	private static final Pattern PAT_VALID_WORD_CHARACTER = Pattern
 			.compile("[\\p{L}\\p{Nd}\\p{Nl}\\p{No}]");
 
